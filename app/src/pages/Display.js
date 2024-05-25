@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import StoredPass from '../components/StoredPass'
-import PostPass from '../components/PostPass'
 
 const Display = () => {
 
@@ -26,7 +25,6 @@ const Display = () => {
                     <StoredPass key={detail._id} detail={detail} /> 
                 ))}
             </div>
-            <PostPass />
         </div>
     )
 }
