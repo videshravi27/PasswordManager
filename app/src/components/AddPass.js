@@ -4,7 +4,7 @@ const AddPass = () => {
     const navigate = useNavigate();
 
     const handleButtonClick = () => {
-        navigate('/');
+        navigate('/post');
     };
 
     return (

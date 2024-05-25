@@ -1,45 +1,55 @@
-/* index.css */
+/* Global styles */
 
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
+/* Layout */
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --primary: #1aac83; /* Primary color */
+  --error: #e7195a; /* Error color */
 }
 body {
-  background: #f1f1f1;
+  background: #f1f1f1; /* Body background color */
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Poppins"; /* Default font family */
 }
+
+/* Navbar styles */
 header {
-  background: #fff;
+  background: #fff; /* Navbar background color */
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  padding: 1px 1px; /* Add padding for some space around */
 }
+
 header .container {
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
+  width: 100%; /* Make the container take the full width */
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* Center the container's content */
+  align-items: center; /* Center items vertically */
 }
+
 header a {
-  color: #333;
+  color: #333; /* Navbar link color */
   text-decoration: none;
 }
+
+/* Page layout styles */
 .pages{
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
 }
 
-/* homepage */
+/* Homepage styles */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
+
+/* Display component styles */
 .workout-details {
   background: #fff;
   border-radius: 4px;
@@ -69,7 +79,7 @@ header a {
   color: #333;
 }
 
-/* new workout form */
+/* Form styles */
 label, input {
   display: block;
 }
