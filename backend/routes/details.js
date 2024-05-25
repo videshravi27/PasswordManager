@@ -16,7 +16,7 @@ router.get('/', getDetails)
 router.get('/:id', getDetail)
 
 //POST 
-router.post('/post', createDetail)
+router.post('/', createDetail)
 
 //Delete
 router.delete('/:id', deleteDetail)

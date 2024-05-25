@@ -9,7 +9,6 @@ const detailSchema = new Schema({
     },
     url: {
         type: String,
-        required: true,
         validate: {
             validator: function(v) {
                 return /^(ftp|http|https):\/\/[^ "]+$/.test(v);
