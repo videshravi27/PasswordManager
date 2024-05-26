@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
+import { useDetailsContext } from '../hooks/useDetailsContext'
+
+//components
 import StoredPass from '../components/StoredPass'
 
 const Display = () => {
+    const { details, dispatch } = useDetailsContext()
 
-    const [details, setDetails] = useState(null)
-    
     useEffect(() =>{
         const fetchDetails = async () => {
             const response = await fetch('/api/details')
             const json = await response.json()        
 
             if (response.ok) {
-                setDetails(json)
+                dispatch({type: 'SET_DETAILS', payload: json})
             }
         }
         
         fetchDetails()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="home">

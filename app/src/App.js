@@ -3,6 +3,7 @@ import Display from './pages/Display'
 import Navbar from './components/Navbar';
 import AddPass from './components/AddPass';
 import PostPass from './components/PostPass';
+// import StoredPass from './components/StoredPass';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<AddPass />} />
           <Route path="/display" element={<Display />} />
           <Route path="/post" element={<PostPass/>} />
+          {/* <Route path="/stored" element={<StoredPass/>} /> */}
         </Routes>
       </BrowserRouter>
     </div>

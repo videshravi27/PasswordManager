@@ -11,7 +11,7 @@ const detailSchema = new Schema({
         type: String,
         validate: {
             validator: function(v) {
-                return /^(ftp|http|https):\/\/[^ "]+$/.test(v);
+                return /^(ftp|http|https|www):\/\/[^ "]+$/.test(v);
             },
             message: props => `${props.value} is not a valid URL!`
         }
