@@ -24,6 +24,24 @@ const getDetail = async (req, res) => {
 //Post a new data
 const createDetail = async (req, res) => {
     const {website, url, username, password} = req.body
+
+    let emptyFields = []
+    if(!website){
+        emptyFields.push('website')
+    }
+    if(!url){
+        emptyFields.push('url')
+    }
+    if(!username){
+        emptyFields.push('username')
+    }
+    if(!password) {
+        emptyFields.push('password')
+    }
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+    }
+
     try{
         const detail = await Detail.create({website, url, username, password})
         res.status(200).json(detail)

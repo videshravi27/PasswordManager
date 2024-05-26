@@ -79,7 +79,7 @@ header a {
   color: #333;
 }
 
-/* Form styles */
+/* new workout form */
 label, input {
   display: block;
 }
@@ -101,58 +101,14 @@ form button {
   border-radius: 4px;
   cursor: pointer;
 }
-
-/* AddPass component styles */
-.flex {
-  display: flex;
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
 }
-.flex-col {
-  flex-direction: column;
-}
-.items-center {
-  align-items: center;
-}
-.justify-center {
-  justify-content: center;
-}
-.h-screen {
-  height: 100vh;
-}
-.text-center {
-  text-align: center;
-}
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-.font-bold {
-  font-weight: 700;
-}
-.text-gray-800 {
-  color: #2d3748;
-}
-.mb-4 {
-  margin-bottom: 1rem;
-}
-.bg-white {
-  background-color: #fff;
-}
-.border {
-  border-width: 1px;
-}
-.border-gray-300 {
-  border-color: #e2e8f0;
-}
-.rounded-full {
-  border-radius: 9999px;
-}
-.w-16 {
-  width: 4rem;
-}
-.h-16 {
-  height: 4rem;
-}
-.focus\:outline-none:focus {
-  outline: 0;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+input.error {
+  border: 5px solid var(--error);
 }

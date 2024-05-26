@@ -9,7 +9,7 @@ const PostPass = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
+    const [emptyFields, setEmptyFields] = useState([])
 
     const handleUrlChange = (e) => {
         let value = e.target.value;
@@ -35,14 +35,15 @@ const PostPass = () => {
 
         if(!response.ok){
             setError(json.error);
-        } else {
+            setEmptyFields(json.emptyFields);
+        }
+        if(response.ok){
+            setEmptyFields([]);
             setWebsite('');
             setUrl('');
             setUsername('');
             setPassword('');
             setError(null);
-            setSuccessMessage('Password saved successfully');
-            console.log('Password stored successfully', json);
             dispatch({type: 'CREATE_DETAIL', payload: json});
         }
     };
@@ -56,6 +57,7 @@ const PostPass = () => {
                 type="text" 
                 onChange={(e) => setWebsite(e.target.value)}
                 value={website}
+                className={emptyFields.includes('website') ? 'empty' : ''}
             />
             
             <label>URL: </label>
@@ -63,6 +65,7 @@ const PostPass = () => {
                 type="url" 
                 onChange={handleUrlChange}
                 value={url}
+                className={emptyFields.includes('url') ? 'empty' : ''}
             />
             
             <label>Username: </label>
@@ -70,6 +73,7 @@ const PostPass = () => {
                 type="text" 
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
+                className={emptyFields.includes('usename') ? 'empty' : ''}
             />
 
             <label>Password</label>
@@ -77,11 +81,11 @@ const PostPass = () => {
                 type="password" 
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                className={emptyFields.includes('password') ? 'empty' : ''}
             />
             
             <button type="submit">Add Password</button>
             {error && <div className="error">{error}</div>}
-            {successMessage && <div className="success">{successMessage}</div>}
         </form>
     );
 }

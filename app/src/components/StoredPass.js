@@ -1,5 +1,8 @@
 import { useDetailsContext } from "../hooks/useDetailsContext"
 
+//date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 const StoredPass = ({detail}) => {
     const { dispatch } = useDetailsContext()
     
@@ -20,8 +23,8 @@ const StoredPass = ({detail}) => {
             <p><strong>Website: </strong> {detail.url}</p>
             <p><strong>Username: </strong> {detail.username}</p>
             <p><strong>password: </strong> {detail.password}</p>
-            <p><strong>Created: </strong>{detail.createdAt}</p>
-            <span onClick={handeClick}>Delete</span>
+            <p><strong></strong>{formatDistanceToNow(new Date(detail.createdAt), { addSuffix: true })}</p>
+            <span className="material-symbols-outlined" onClick={handeClick}>Delete</span>
         </div>
     )
 }
