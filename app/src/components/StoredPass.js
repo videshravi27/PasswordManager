@@ -1,19 +1,19 @@
 import { useDetailsContext } from "../hooks/useDetailsContext"
 
 //date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { format } from 'date-fns'
 
-const StoredPass = ({detail}) => {
+const StoredPass = ({ detail }) => {
     const { dispatch } = useDetailsContext()
     
-    const handeClick = async () => {
+    const handleClick = async () => {
         const response = await fetch('/api/details/' + detail._id, {
             method: 'DELETE'
         })
         const json = await response.json()
 
-        if(response.ok){
-            dispatch({type: 'DELETE_DETAIL', payload: json})
+        if (response.ok) {
+            dispatch({ type: 'DELETE_DETAIL', payload: json })
         }
     }
     
@@ -22,9 +22,9 @@ const StoredPass = ({detail}) => {
             <h2>{detail.website}</h2>
             <p><strong>Website: </strong> {detail.url}</p>
             <p><strong>Username: </strong> {detail.username}</p>
-            <p><strong>password: </strong> {detail.password}</p>
-            <p><strong></strong>{formatDistanceToNow(new Date(detail.createdAt), { addSuffix: true })}</p>
-            <span className="material-symbols-outlined" onClick={handeClick}>Delete</span>
+            <p><strong>Password: </strong> {detail.password}</p>
+            <p><strong>Created At: </strong>{format(new Date(detail.createdAt), 'PPpp')}</p>
+            <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
         </div>
     )
 }
