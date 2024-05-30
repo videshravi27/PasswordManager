@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Display from './pages/Display'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
 import Navbar from './components/Navbar';
 import AddPass from './components/AddPass';
 import PostPass from './components/PostPass';
@@ -14,6 +16,8 @@ function App() {
           <Route path="/" element={<AddPass />} />
           <Route path="/display" element={<Display />} />
           <Route path="/post" element={<PostPass/>} />
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/login" element={<Login/>} />
           {/* <Route path="/stored" element={<StoredPass/>} /> */}
         </Routes>
       </BrowserRouter>
