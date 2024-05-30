@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout'
 
 const Navbar = () => {
+    const { logout } = useLogout()
+
+    const handleClick = () => {
+        logout()
+    }
+
     return (
     <header className="bg-white flex justify-center py-4">
         <div className="max-w-[1400px] w-full flex items-center ml-48">
@@ -12,6 +19,9 @@ const Navbar = () => {
         </div>
         <div>
             <nav className="flex-1 flex justify-end items-center mr-8">
+                <div>
+                    <button onClick={handleClick}>Logout</button>
+                </div>
                 <div>
                     <Link to="/login" className="text-gray-800 no-underline ml-4">
                     Login
