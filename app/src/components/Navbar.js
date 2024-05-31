@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
     const { logout } = useLogout()
+    const { user } = useAuthContext()
 
     const handleClick = () => {
         logout()
@@ -19,9 +21,13 @@ const Navbar = () => {
         </div>
         <div>
             <nav className="flex-1 flex justify-end items-center mr-8">
+                {user && (
                 <div>
+                    <span>{user.email}</span>
                     <button onClick={handleClick}>Logout</button>
                 </div>
+                )}
+                {!user && (
                 <div>
                     <Link to="/login" className="text-gray-800 no-underline ml-4">
                     Login
@@ -30,6 +36,7 @@ const Navbar = () => {
                     Signup
                     </Link>
                 </div>
+                )}
             </nav>
         </div>
     </header>
