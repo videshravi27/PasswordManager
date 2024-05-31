@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDetailsContext } from '../hooks/useDetailsContext';
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const PostPass = () => {
     const { dispatch } = useDetailsContext();
+    const { user } = useAuthContext()
 
     const [website, setWebsite] = useState('');
     const [url, setUrl] = useState('');
@@ -21,6 +23,10 @@ const PostPass = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(!user){
+            setError('You must be logged in')
+            return 
+        }
 
         const detail = { website, url, username, password };
 
@@ -28,7 +34,8 @@ const PostPass = () => {
             method: 'POST',
             body: JSON.stringify(detail),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}` 
             }
         });
         const json = await response.json();

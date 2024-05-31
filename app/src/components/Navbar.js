@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="max-w-[1400px] w-full flex items-center ml-48">
             <div className="flex-1 flex justify-center">
                 <Link to="/" className="text-gray-800 no-underline">
-                    <h1 className="text-2xl font-bold">Password Manager</h1>
+                    <h1 className="text-3xl font-bold">Password Manager</h1>
                 </Link>
             </div>
         </div>

@@ -1,14 +1,22 @@
 import { useDetailsContext } from "../hooks/useDetailsContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 //date fns
 import { format } from 'date-fns'
 
 const StoredPass = ({ detail }) => {
     const { dispatch } = useDetailsContext()
-    
+    const { user } =useAuthContext()
+
     const handleClick = async () => {
+        if(!user){
+            return
+        }
         const response = await fetch('/api/details/' + detail._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}` 
+            }
         })
         const json = await response.json()
 

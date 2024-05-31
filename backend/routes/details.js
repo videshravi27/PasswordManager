@@ -6,8 +6,12 @@ const {
     deleteDetail,
     updateDetail
 } = require('../controllers/detailController') 
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
+
+//require Auth for all routes
+router.use(requireAuth)
 
 //GET ALL 
 router.get('/', getDetails)
