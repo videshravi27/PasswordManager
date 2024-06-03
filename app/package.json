@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:4000",
+  "proxy": "'https://password-manager-alpha-bay.vercel.app",
   "name": "app",
   "version": "0.1.0",
   "private": true,
