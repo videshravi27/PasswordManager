@@ -69,13 +69,14 @@ form.signup, form.login{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-} 
+}
 .workout-details {
-  margin-top: 10px;
-  width: 120%;
-  max-width: 600px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  width: 100%;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
   position: relative;

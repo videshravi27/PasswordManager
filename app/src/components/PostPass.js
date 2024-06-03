@@ -22,7 +22,7 @@ const PostPass = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if(!user){
             setError('You must be logged in')
             return 
