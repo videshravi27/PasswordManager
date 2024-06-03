@@ -1,7 +1,9 @@
 import { useAuthContext } from './useAuthContext'
+import { useDetailsContext } from './useDetailsContext'
 
 export const useLogout = () => {
     const { dispatch } = useAuthContext()
+    const { dispatch: detailsDispatch } = useDetailsContext()
 
     const logout = () => {
         //remove user from storage
@@ -9,6 +11,8 @@ export const useLogout = () => {
 
         //dispatch logout action
         dispatch({type: 'LOGOUT'})
+        detailsDispatch({type: 'SET_DETAILS', payload: null})
+        
     }
     return { logout }
 }
