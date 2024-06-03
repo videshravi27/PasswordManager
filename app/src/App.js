@@ -6,7 +6,6 @@ import Login from './pages/Login'
 import Navbar from './components/Navbar';
 import AddPass from './components/AddPass';
 import PostPass from './components/PostPass';
-// import StoredPass from './components/StoredPass';
 
 function App() {
   const { user } = useAuthContext();
@@ -21,7 +20,6 @@ function App() {
           <Route path="/post" element={user ? <PostPass/> : <Navigate to="/login"/>} />
           <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/"/>} />
           <Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>} />
-          {/* <Route path="/stored" element={<StoredPass/>} /> */}
         </Routes>
       </BrowserRouter>
     </div>

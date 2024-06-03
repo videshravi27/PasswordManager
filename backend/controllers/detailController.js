@@ -3,7 +3,7 @@ const Detail = require('../models/detailModel')
 
 //Get all Data
 const getDetails = async (req, res) => {
-    const details = await Detail.find({})
+    const details = await Detail.find({}).sort({ createdAt: -1 });
     res.status(200).json(details)
 }
 

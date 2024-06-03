@@ -14,7 +14,7 @@ export const detailsReducer = (state, action) => {
             }
         case 'DELETE_DETAIL':
             return{
-                details: state.details.filter(detail => detail._id!== action.payload._id)
+                details: state.details.filter(detail => detail._id !== action.payload._id)
             }
         default:
             return state
@@ -23,7 +23,7 @@ export const detailsReducer = (state, action) => {
 
 export const DetailsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(detailsReducer, {
-        details: null
+        details: []
     })
     
     return(

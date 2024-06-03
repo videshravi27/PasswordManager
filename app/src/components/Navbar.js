@@ -1,46 +1,38 @@
 import { Link } from 'react-router-dom';
-import { useLogout } from '../hooks/useLogout'
+import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
-    const { logout } = useLogout()
-    const { user } = useAuthContext()
+    const { logout } = useLogout();
+    const { user } = useAuthContext();
 
     const handleClick = () => {
-        logout()
+        logout();
     }
 
     return (
-    <header className="bg-white flex justify-center py-4">
-        <div className="max-w-[1400px] w-full flex items-center ml-48">
-            <div className="flex-1 flex justify-center">
-                <Link to="/" className="text-gray-800 no-underline">
-                    <h1 className="text-3xl font-bold">Password Manager</h1>
-                </Link>
-            </div>
-        </div>
-        <div>
-            <nav className="flex-1 flex justify-end items-center mr-8">
+        <header className="bg-white py-4">
+            <div className="max-w-[1400px] w-full mx-auto flex items-center justify-between px-4">
+                <div className="flex-1 flex justify-center">
+                    <Link to="/" className="text-gray-800 no-underline">
+                        <div className="logo font-bold text-black text-2xl">
+                            <span className='text-green-500'> &lt; </span>
+                            <span>Pass</span>
+                            <span className='text-green-500'>OP /&gt; </span>
+                        </div>
+                    </Link>
+                </div>
                 {user && (
-                <div>
-                    <span>{user.email}</span>
-                    <button onClick={handleClick}>Logout</button>
-                </div>
+                    <div className="flex items-center space-x-4">
+                        <span>{user.email}</span>
+                        <button onClick={handleClick} className="text-gray-800 no-underline">
+                            Logout
+                        </button>
+                    </div>
                 )}
-                {!user && (
-                <div>
-                    <Link to="/login" className="text-gray-800 no-underline ml-4">
-                    Login
-                    </Link>
-                    <Link to="/signup" className="text-gray-800 no-underline ml-4">
-                    Signup
-                    </Link>
-                </div>
-                )}
-            </nav>
-        </div>
-    </header>
-    )
+            </div>
+        </header>
+    );
 }
 
-export default Navbar
+export default Navbar;
