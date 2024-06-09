@@ -3,7 +3,8 @@ const Detail = require('../models/detailModel')
 
 //Get all Data
 const getDetails = async (req, res) => {
-    const details = await Detail.find({}).sort({ createdAt: -1 });
+    const user_id = req.user._id
+    const details = await Detail.find({user_id}).sort({ createdAt: -1 });
     res.status(200).json(details)
 }
 
@@ -43,7 +44,8 @@ const createDetail = async (req, res) => {
     }
 
     try{
-        const detail = await Detail.create({website, url, username, password})
+        const user_id = req.user._id
+        const detail = await Detail.create({website, url, username, password, user_id})
         res.status(200).json(detail)
     }catch(error){
         res.status(400).json({error: error.message})
