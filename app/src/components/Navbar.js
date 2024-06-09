@@ -11,25 +11,25 @@ const Navbar = () => {
     }
 
     return (
-        <header className="bg-white py-4">
-            <div className="max-w-[1400px] w-full mx-auto flex items-center justify-between px-4">
-                <div className="flex-1 flex justify-center">
-                    <Link to="/" className="text-gray-800 no-underline">
-                        <div className="logo font-bold text-black text-2xl">
-                            <span className='text-green-500'> &lt; </span>
-                            <span>Pass</span>
-                            <span className='text-green-500'>OP /&gt; </span>
+        <header className="bg-white p-4 text-black fixed top-0 w-full shadow-md z-10 h-16">
+            <div className="container mx-auto flex justify-between items-center">
+                <Link to="/" className="text-2xl font-bold flex items-center">
+                    <span className="mr-2">Vault</span>
+                </Link>
+                <nav className="ml-auto">
+                    {user ? (
+                        <div className="flex items-center">
+                            <Link to="/post">
+                                <button className="bg-green-500 text-white px-2 py-2 rounded">
+                                    Add
+                                </button>
+                            </Link>
+                            <button onClick={handleClick} className="bg-red-500 text-white px-2 py-2 rounded ml-4">
+                                Logout
+                            </button>
                         </div>
-                    </Link>
-                </div>
-                {user && (
-                    <div className="flex items-center space-x-4">
-                        <span>{user.email}</span>
-                        <button onClick={handleClick} className="text-gray-800 no-underline">
-                            Logout
-                        </button>
-                    </div>
-                )}
+                    ) : null}
+                </nav>
             </div>
         </header>
     );
