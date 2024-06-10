@@ -1,54 +1,72 @@
-const mongoose = require('mongoose')
-const Detail = require('../models/detailModel')
+const mongoose = require('mongoose');
+const Detail = require('../models/detailModel');
+const CryptoJS = require("crypto-js");
 
-//Get all Data
+const encryptPassword = (password) => {
+    return CryptoJS.AES.encrypt(password, 'your-secret-key').toString();
+}
+
+const decryptPassword = (encryptedPassword) => {
+    return CryptoJS.AES.decrypt(encryptedPassword, 'your-secret-key').toString(CryptoJS.enc.Utf8);
+}
+
 const getDetails = async (req, res) => {
-    const user_id = req.user._id
-    const details = await Detail.find({user_id}).sort({});
-    res.status(200).json(details)
+    const user_id = req.user._id;
+    const details = await Detail.find({ user_id }).sort({});
+
+    const decryptedDetails = details.map(detail => {
+        return {
+            ...detail.toObject(),
+            password: decryptPassword(detail.password)
+        };
+    });
+
+    res.status(200).json(decryptedDetails);
 }
 
-//Get a single data
 const getDetail = async (req, res) => {
-    const { id } = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such data'})
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such data' });
     }
-    const detail = await Detail.findById(id)
+    const detail = await Detail.findById(id);
 
-    if(!detail){
-        return res.status(404).json({error: 'No such data'})
+    if (!detail) {
+        return res.status(404).json({ error: 'No such data' });
     }
-    res.status(200).json(detail)
+
+    detail.password = decryptPassword(detail.password);
+
+    res.status(200).json(detail);
 }
 
-//Post a new data
 const createDetail = async (req, res) => {
-    const {website, url, username, password} = req.body
+    const { website, url, username, password } = req.body;
 
-    let emptyFields = []
-    if(!website){
-        emptyFields.push('website')
+    let emptyFields = [];
+    if (!website) {
+        emptyFields.push('website');
     }
-    if(!url){
-        emptyFields.push('url')
+    if (!url) {
+        emptyFields.push('url');
     }
-    if(!username){
-        emptyFields.push('username')
+    if (!username) {
+        emptyFields.push('username');
     }
-    if(!password) {
-        emptyFields.push('password')
+    if (!password) {
+        emptyFields.push('password');
     }
-    if(emptyFields.length > 0){
-        return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
     }
 
-    try{
-        const user_id = req.user._id
-        const detail = await Detail.create({website, url, username, password, user_id})
-        res.status(200).json(detail)
-    }catch(error){
-        res.status(400).json({error: error.message})
+    try {
+        const user_id = req.user._id;
+        const encryptedPassword = encryptPassword(password);
+        const detail = await Detail.create({ website, url, username, password: encryptedPassword, user_id });
+        res.status(200).json(detail);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -58,8 +76,8 @@ const deleteDetail = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ error: 'No such data' });
     }
-    const detail = await Detail.findOneAndDelete({_id: id});
-    
+    const detail = await Detail.findOneAndDelete({ _id: id });
+
     if (!detail) {
         return res.status(400).json({ error: 'No such data' });
     }
@@ -73,7 +91,7 @@ const updateDetail = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ error: 'No such data' });
     }
-    const detail = await Detail.findOneAndUpdate({_id: id}, {
+    const detail = await Detail.findOneAndUpdate({ _id: id }, {
         ...req.body
     })
     if (!detail) {

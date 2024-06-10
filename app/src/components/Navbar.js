@@ -13,9 +13,11 @@ const Navbar = () => {
     return (
         <header className="bg-white p-4 text-black fixed top-0 w-full shadow-md z-10 h-16">
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className="text-2xl font-bold flex items-center">
-                    <span className="mr-2">Vault</span>
-                </Link>
+                <div className="flex-1 flex justify-center">
+                    <Link to="/" className="text-2xl font-bold">
+                        Vault
+                    </Link>
+                </div>
                 <nav className="ml-auto">
                     {user ? (
                         <div className="flex items-center">
