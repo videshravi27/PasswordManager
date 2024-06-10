@@ -91,13 +91,25 @@ const updateDetail = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ error: 'No such data' });
     }
-    const detail = await Detail.findOneAndUpdate({ _id: id }, {
-        ...req.body
-    })
-    if (!detail) {
-        return res.status(400).json({ error: 'No such data' });
+
+    if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).json({ error: 'No data provided to update' });
     }
-    res.status(200).json(detail);
+    try{
+        const detail = await Detail.findByIdAndUpdate(
+            { _id: id }, 
+            {...req.body},
+            {new: true, runValidators: true}
+        )
+        
+        if (!detail) {
+            return res.status(400).json({ error: 'No such data' });
+        }
+        
+        res.status(200).json(detail);
+    }catch (error){
+        res.status(500).json({ error: error.message })
+    }
 }
 
 module.exports = {
